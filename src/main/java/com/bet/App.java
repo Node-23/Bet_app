@@ -1,9 +1,14 @@
 package com.bet;
 
+import javax.swing.JFrame;
+
+import com.bet.View.MainView;
+
 public class App {
     
     public static void main(String[] args) {
-        System.out.println("Hello word!");
+        
+        JFrame mainView = new MainView(); 
     }
-    
+
 }
