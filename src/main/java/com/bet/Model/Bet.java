@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.bet.Model.Enums.BetType;
 
-public class Bet {
+public abstract class Bet {
     private BetType type;
     private String[] bettors;
     private Date date;
@@ -17,12 +17,12 @@ public class Bet {
         this.date = date;
     }
     
-    public BetType getType() {
-        return this.type;
-    }
-
     public String[] getBettors() {
         return this.bettors;
+    }
+
+    public BetType getType() {
+        return this.type;
     }
 
     public void setBettors(String[] bettors) {
