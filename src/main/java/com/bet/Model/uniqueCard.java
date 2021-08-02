@@ -24,5 +24,4 @@ public class uniqueCard extends Bet{
     public void setNumbers(int[] numbers) {
         this.numbers = numbers;
     }
-    
 }
