@@ -1,3 +1,9 @@
+package com.bet.Model;
+
+import java.util.Date;
+
+import com.bet.Model.Enums.BetType;
+
 public class uniqueCard extends Bet{
 
     private int cardNumbersQuantity;
@@ -5,7 +11,7 @@ public class uniqueCard extends Bet{
 
     uniqueCard(BetType type, String[] bettors, Date date,int[] numbers, int cardNumbersQuantity){
         super(type, bettors, date);
-        type=BetType.uniqueCard;
+        type=BetType.UniqueCard;
         this.numbers=numbers;
     }
 
