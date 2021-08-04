@@ -7,10 +7,22 @@ public class Bettor {
     private String mainPhoneNumber;
     private String secondPhoneNumber;
 
+    public Bettor(String cpf, String name) {
+        this.cpf = cpf;
+        this.name = name;
+    }
+
     public Bettor(String cpf, String name, String mainPhoneNumber) {
         this.cpf = cpf;
         this.name = name;
         this.mainPhoneNumber = mainPhoneNumber;
+    }
+
+    public Bettor(String cpf, String name, String mainPhoneNumber, String secondPhoneNumber) {
+        this.cpf = cpf;
+        this.name = name;
+        this.mainPhoneNumber = mainPhoneNumber;
+        this.secondPhoneNumber = secondPhoneNumber;
     }
 
     public String getCpf() {
