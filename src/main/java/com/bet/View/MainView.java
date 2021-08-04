@@ -11,23 +11,36 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.bet.View.MenuItemViews.BetMenuViews.EditBetItemView;
+import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
+import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
+import com.bet.View.MenuItemViews.BetMenuViews.NewBetItemView;
+import com.bet.View.MenuItemViews.BettorMenuViews.DeleteItemView;
+import com.bet.View.MenuItemViews.BettorMenuViews.EditItemView;
+import com.bet.View.MenuItemViews.BettorMenuViews.ListItemView;
+import com.bet.View.MenuItemViews.BettorMenuViews.RegisterItemView;
+import com.bet.View.MenuItemViews.DrawMenuViews.DrawItemView;
+import com.bet.View.MenuItemViews.DrawMenuViews.ListDrawItemView;
+import com.bet.View.MenuItemViews.HelpMenuViews.AboutItemView;
+import com.bet.View.MenuItemViews.HelpMenuViews.HowToUseItemView;
+
 public class MainView extends JFrame implements ActionListener{
 
-    JMenuItem registerItem = new JMenuItem("Register");
-    JMenuItem editItem = new JMenuItem("Edit");
-    JMenuItem listItem = new JMenuItem("List Bettors");
-    JMenuItem deleteItem = new JMenuItem("Delete");
+    private JMenuItem registerItem = new JMenuItem("Register");
+    private JMenuItem editItem = new JMenuItem("Edit");
+    private JMenuItem listItem = new JMenuItem("List Bettors");
+    private JMenuItem deleteItem = new JMenuItem("Delete");
 
-    JMenuItem newBetItem = new JMenuItem("New Bet");
-    JMenuItem editBetItem = new JMenuItem("Edit Bet");
-    JMenuItem listBetItem = new JMenuItem("List Bets");
-    JMenuItem endBetItem = new JMenuItem("End Bet");
+    private JMenuItem newBetItem = new JMenuItem("New Bet");
+    private JMenuItem editBetItem = new JMenuItem("Edit Bet");
+    private JMenuItem listBetItem = new JMenuItem("List Bets");
+    private JMenuItem endBetItem = new JMenuItem("End Bet");
 
-    JMenuItem drawItem = new JMenuItem("Draw Bet");
-    JMenuItem listDrawItem = new JMenuItem("List Draws");
+    private JMenuItem drawItem = new JMenuItem("Draw Bet");
+    private JMenuItem listDrawItem = new JMenuItem("List Draws");
 
-    JMenuItem howToUseItem = new JMenuItem("How can i use it?");
-    JMenuItem aboutItem = new JMenuItem("About");
+    private JMenuItem howToUseItem = new JMenuItem("How can i use it?");
+    private JMenuItem aboutItem = new JMenuItem("About");
     
     public MainView(){
         //Frame settings----------------------------------
@@ -36,6 +49,7 @@ public class MainView extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(0x334756));
+        setLocationRelativeTo(null); //This method make the window shows in the center of the screen
 
         //Menubars settings----------------------------------    
         JMenuBar menuBar = new JMenuBar();
@@ -93,40 +107,51 @@ public class MainView extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerItem) {
             this.dispose();
-            new RegisterView();
+            new RegisterItemView();
         }
         if (e.getSource() == editItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new EditItemView();
         }
         if (e.getSource() == listItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new ListItemView();
         }
         if (e.getSource() == deleteItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new DeleteItemView();
         }
         if (e.getSource() == newBetItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new NewBetItemView();
         }
         if (e.getSource() == editBetItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new EditBetItemView();
         }
         if (e.getSource() == listBetItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new ListBetItemView();
         }
         if (e.getSource() == endBetItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new EndBetItemView();
         }
         if (e.getSource() == drawItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new DrawItemView();
         }
         if (e.getSource() == listDrawItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new ListDrawItemView();
         }
         if (e.getSource() == howToUseItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new HowToUseItemView();
         }
         if (e.getSource() == aboutItem) {
-            // TODO Auto-generated method stub
+            this.dispose();
+            new AboutItemView();
         }
         
     }

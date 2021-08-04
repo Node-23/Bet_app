@@ -1,4 +1,4 @@
-package com.bet.View;
+package com.bet.View.MenuItemViews.BettorMenuViews;
 
 import java.awt.Color;
 import java.awt.event.WindowEvent;
@@ -6,17 +6,19 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-public class RegisterView extends JFrame implements WindowListener {
+import com.bet.View.MainView;
 
-    RegisterView(){
+public class EditItemView extends JFrame implements WindowListener{
+
+    public EditItemView(){
         this.setSize(420, 420);
-        this.setTitle("Bet App");
+        this.setTitle("Bettor Edit");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(0x334756)); 
         this.addWindowListener(this);
+        setLocationRelativeTo(null);
         this.setVisible(true);
-
     }
 
     @Override
@@ -37,4 +39,3 @@ public class RegisterView extends JFrame implements WindowListener {
     @Override
     public void windowOpened(WindowEvent arg0) {}
 }
-
