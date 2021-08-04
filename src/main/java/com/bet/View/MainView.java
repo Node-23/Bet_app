@@ -41,6 +41,7 @@ public class MainView extends JFrame implements ActionListener{
 
     private JMenuItem howToUseItem = new JMenuItem("How can i use it?");
     private JMenuItem aboutItem = new JMenuItem("About");
+
     
     public MainView(){
         //Frame settings----------------------------------
