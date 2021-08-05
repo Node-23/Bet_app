@@ -11,12 +11,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.bet.View.MenuItemViews.BetMenuViews.EditBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.NewBetItemView;
-import com.bet.View.MenuItemViews.BettorMenuViews.DeleteItemView;
-import com.bet.View.MenuItemViews.BettorMenuViews.EditItemView;
 import com.bet.View.MenuItemViews.BettorMenuViews.ListItemView;
 import com.bet.View.MenuItemViews.BettorMenuViews.RegisterItemView;
 import com.bet.View.MenuItemViews.DrawMenuViews.DrawItemView;
@@ -27,12 +24,9 @@ import com.bet.View.MenuItemViews.HelpMenuViews.HowToUseItemView;
 public class MainView extends JFrame implements ActionListener{
 
     private JMenuItem registerItem = new JMenuItem("Register");
-    private JMenuItem editItem = new JMenuItem("Edit");
     private JMenuItem listItem = new JMenuItem("List Bettors");
-    private JMenuItem deleteItem = new JMenuItem("Delete");
 
     private JMenuItem newBetItem = new JMenuItem("New Bet");
-    private JMenuItem editBetItem = new JMenuItem("Edit Bet");
     private JMenuItem listBetItem = new JMenuItem("List Bets");
     private JMenuItem endBetItem = new JMenuItem("End Bet");
 
@@ -60,11 +54,8 @@ public class MainView extends JFrame implements ActionListener{
         JMenu helpMenu = new JMenu("Help");
         
         bettorMenu.add(registerItem);
-        bettorMenu.add(editItem);
         bettorMenu.add(listItem);
-        bettorMenu.add(deleteItem);
         betMenu.add(newBetItem);
-        betMenu.add(editBetItem);
         betMenu.add(listBetItem);
         betMenu.add(endBetItem);
         drawMenu.add(drawItem);
@@ -74,11 +65,8 @@ public class MainView extends JFrame implements ActionListener{
 
         //Menubar action Events---------------------------------------------
         registerItem.addActionListener(this);
-        editItem.addActionListener(this);
         listItem.addActionListener(this);
-        deleteItem.addActionListener(this);
         newBetItem.addActionListener(this);
-        editBetItem.addActionListener(this);
         listBetItem.addActionListener(this);
         endBetItem.addActionListener(this);
         drawItem.addActionListener(this);
@@ -110,26 +98,17 @@ public class MainView extends JFrame implements ActionListener{
             this.dispose();
             new RegisterItemView();
         }
-        if (e.getSource() == editItem) {
-            this.dispose();
-            new EditItemView();
-        }
+
         if (e.getSource() == listItem) {
             this.dispose();
             new ListItemView();
         }
-        if (e.getSource() == deleteItem) {
-            this.dispose();
-            new DeleteItemView();
-        }
+       
         if (e.getSource() == newBetItem) {
             this.dispose();
             new NewBetItemView();
         }
-        if (e.getSource() == editBetItem) {
-            this.dispose();
-            new EditBetItemView();
-        }
+        
         if (e.getSource() == listBetItem) {
             this.dispose();
             new ListBetItemView();
@@ -154,6 +133,5 @@ public class MainView extends JFrame implements ActionListener{
             this.dispose();
             new AboutItemView();
         }
-        
     }
 }
