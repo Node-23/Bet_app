@@ -1,14 +1,18 @@
 package com.bet.View.MenuItemViews.BettorMenuViews;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import com.bet.View.MainView;
+
+
 import javax.swing.JLabel;
 
-public class RegisterItemView extends JFrame implements WindowListener { 
+public class RegisterItemView extends JFrame implements WindowListener, ActionListener { 
     
     private JTextField textNameField = new JTextField();
     private JTextField textIdField = new JTextField();
@@ -74,9 +78,12 @@ public class RegisterItemView extends JFrame implements WindowListener {
         this.add(firstPhoneLabel);
         this.add(secondPhoneLabel);
 
+        confirmButton.addActionListener(this);
+        cancelButton.addActionListener(this);
 
         this.setVisible(true);
     }
+
 
 
     @Override
@@ -96,4 +103,18 @@ public class RegisterItemView extends JFrame implements WindowListener {
     public void windowIconified(WindowEvent arg0) {}
     @Override
     public void windowOpened(WindowEvent arg0) {}
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==confirmButton){
+            System.out.println(textNameField.getText() + "\n" + 
+            textIdField.getText() + "\n" + textFirstNumberField.getText() + "\n" + textSecondNumberField.getText());
+        }
+        if(e.getSource()==cancelButton){
+            this.dispose();
+        }
+        
+    }
 }
