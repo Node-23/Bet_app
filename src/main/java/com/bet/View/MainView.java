@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.bet.Service.Database.DBConnection;
+import com.bet.Service.Database.DBCreateTables;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.NewBetItemView;
@@ -144,6 +145,7 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
     public void windowOpened(WindowEvent e) {
         DBConnection DBconnection = new DBConnection();
         Connection connection = DBconnection.connect();
+        DBCreateTables.createTables(connection);
         try {
             connection.close();
         } catch (SQLException e1) {
