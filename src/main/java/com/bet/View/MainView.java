@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +15,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.bet.Service.Database.DBConnection;
+import com.bet.Service.Database.DBCreateTables;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.NewBetItemView;
@@ -21,7 +27,7 @@ import com.bet.View.MenuItemViews.DrawMenuViews.ListDrawItemView;
 import com.bet.View.MenuItemViews.HelpMenuViews.AboutItemView;
 import com.bet.View.MenuItemViews.HelpMenuViews.HowToUseItemView;
 
-public class MainView extends JFrame implements ActionListener{
+public class MainView extends JFrame implements ActionListener, WindowListener{
 
     private JMenuItem registerItem = new JMenuItem("Register");
     private JMenuItem listItem = new JMenuItem("List Bettors");
@@ -45,7 +51,7 @@ public class MainView extends JFrame implements ActionListener{
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(0x334756));
         setLocationRelativeTo(null); //This method make the window shows in the center of the screen
-
+        this.addWindowListener(this);
         //Menubars settings----------------------------------    
         JMenuBar menuBar = new JMenuBar();
         JMenu bettorMenu = new JMenu("Bettors");
@@ -134,4 +140,36 @@ public class MainView extends JFrame implements ActionListener{
             new AboutItemView();
         }
     }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        DBConnection DBconnection = new DBConnection();
+        Connection connection = DBconnection.connect();
+        try {
+            connection.close();
+        } catch (SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+    }
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+    @Override
+    public void windowClosed(WindowEvent e) { 
+    }
+    @Override
+    public void windowClosing(WindowEvent e) {  
+    }
+    @Override
+    public void windowDeactivated(WindowEvent e) { 
+    }
+    @Override
+    public void windowDeiconified(WindowEvent e) {  
+    }
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
 }
+
