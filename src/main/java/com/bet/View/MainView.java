@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.bet.Service.Database.DBConnection;
+import com.bet.Service.Database.DBCreateTables;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.NewBetItemView;
