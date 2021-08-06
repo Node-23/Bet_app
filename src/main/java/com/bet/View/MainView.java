@@ -145,6 +145,7 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
     public void windowOpened(WindowEvent e) {
         DBConnection DBconnection = new DBConnection();
         Connection connection = DBconnection.connect();
+        DBCreateTables.createTables(connection);
         try {
             connection.close();
         } catch (SQLException e1) {
