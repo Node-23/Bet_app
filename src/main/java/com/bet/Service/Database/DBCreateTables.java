@@ -12,7 +12,7 @@ public class DBCreateTables {
             "(CPF varchar(14) PRIMARY KEY     NOT NULL," +
             " NAME           varchar(60)    NOT NULL, " +
             " mainPhoneNumber            varchar(15), " +
-            " secondaryPhoneNumber        CHAR(50))";
+            " secondaryPhoneNumber        varchar(15))";
             statement.executeUpdate(createBettorTable);
             statement.close();
         } catch (SQLException e) {

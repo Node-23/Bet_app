@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
 import com.bet.View.MainView;
@@ -73,13 +74,11 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         confirmButton.setForeground(Color.white);
         confirmButton.setBackground(Color.green);
         this.add(confirmButton);
-        confirmButton.addFocusListener(this);
 
         cancelButton.setBounds(227, 300, 115, 43);
         cancelButton.setForeground(Color.white);
         cancelButton.setBackground(Color.red);
         this.add(cancelButton);
-        cancelButton.addFocusListener(this);
 
         nameLabel = new JLabel("Name: ");
         idLabel = new JLabel("CPF: ");
@@ -102,6 +101,12 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
+        confirmButton.addFocusListener(this);
+        cancelButton.addFocusListener(this);
+        textNameField.addFocusListener(this);
+        textCPFField.addFocusListener(this);
+        textFirstNumberField.addFocusListener(this);
+        textSecondNumberField.addFocusListener(this);
 
         try {
             MaskFormatter nameMask = new MaskFormatter(nameMaskQuantity);
@@ -161,20 +166,24 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             String cpf = "'" + textCPFField.getText() + "'";
             String mainphonenumber = "'" + textFirstNumberField.getText() + "'";
             String secondaryphonenumber = "'" + textSecondNumberField.getText() + "'";
-            Statement statement;
-            try {
-                statement = connection.createStatement();
-                String insertNewBettor = "INSERT INTO bettors(cpf,name,mainphonenumber,secondaryphonenumber) "
-                        + "VALUES (" + cpf + "," + name + ", " + mainphonenumber + "," + secondaryphonenumber + ");";
-                statement.executeUpdate(insertNewBettor);
-                statement.close();
-            } catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            if (textNameField.getText().isBlank() || cpf.replaceAll("\\D+", "").length() != 11
+                    || mainphonenumber.replaceAll("\\D+", "").length() != 11
+                    || secondaryphonenumber.replaceAll("\\D+", "").length() != 11) {
+                JOptionPane.showMessageDialog(null, "All fields must be filled", "Bettor Register",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
+                JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
+                        JOptionPane.PLAIN_MESSAGE);
+                name = "";
+                cpf = "";
+                mainphonenumber = "";
+                secondaryphonenumber = "";
+                textNameField.setText("");
+                textCPFField.setText("");
+                textFirstNumberField.setText("");
+                textSecondNumberField.setText("");
             }
-            JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
-                    JOptionPane.PLAIN_MESSAGE);
-            this.dispose();
         }
         if (e.getSource() == cancelButton) {
             this.dispose();
@@ -182,19 +191,73 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
     }
 
+    private void bdRegistration(String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            String insertNewBettor = "INSERT INTO bettors(cpf,name,mainphonenumber,secondaryphonenumber) " + "VALUES ("
+                    + cpf + "," + name + ", " + mainphonenumber + "," + secondaryphonenumber + ");";
+            statement.executeUpdate(insertNewBettor);
+            statement.close();
+        } catch (SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+
     @Override
     public void focusGained(FocusEvent f) {
-        if(f.getSource() == confirmButton){
+        if (f.getSource() == confirmButton) {
             UIManager.put("Button.select", new Color(0x2d572c));
         }
 
-        if(f.getSource() == cancelButton){
+        if (f.getSource() == cancelButton) {
             UIManager.put("Button.select", new Color(0xcc0000));
+        }
+
+        if (f.getSource() == textNameField) {
+            textNameField.setBorder(null);
+        }
+
+        if (f.getSource() == textCPFField) {
+            textCPFField.setBorder(null);
+        }
+
+        if (f.getSource() == textFirstNumberField) {
+            textFirstNumberField.setBorder(null);
+        }
+
+        if (f.getSource() == textSecondNumberField) {
+            textSecondNumberField.setBorder(null);
         }
     }
 
     @Override
     public void focusLost(FocusEvent f) {
-        UIManager.put("Button.select", new Color(0xffffff)); 
+        UIManager.put("Button.select", new Color(0xffffff));
+
+        if (f.getSource() == textNameField) {
+            if (textNameField.getText().isBlank()) {
+                textNameField.setBorder(new LineBorder(Color.red, 2));
+            }
+        }
+
+        if (f.getSource() == textCPFField) {
+            if (textCPFField.getText().replaceAll("\\D+", "").length() != 11) {
+                textCPFField.setBorder(new LineBorder(Color.red, 2));
+            }
+        }
+
+        if (f.getSource() == textFirstNumberField) {
+            if (textFirstNumberField.getText().replaceAll("\\D+", "").length() != 11) {
+                textFirstNumberField.setBorder(new LineBorder(Color.red, 2));
+            }
+        }
+
+        if (f.getSource() == textSecondNumberField) {
+            if (textSecondNumberField.getText().replaceAll("\\D+", "").length() != 11) {
+                textSecondNumberField.setBorder(new LineBorder(Color.red, 2));
+            }
+        }
     }
 }
