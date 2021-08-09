@@ -28,6 +28,10 @@ import com.bet.View.MenuItemViews.HelpMenuViews.AboutItemView;
 import com.bet.View.MenuItemViews.HelpMenuViews.HowToUseItemView;
 
 public class MainView extends JFrame implements ActionListener, WindowListener{
+    private boolean exit = false;
+    //DB settings-------------------------------------
+    DBConnection DBconnection = new DBConnection();
+    Connection connection = DBconnection.connect();
 
     private JMenuItem registerItem = new JMenuItem("Register");
     private JMenuItem listItem = new JMenuItem("List Bettors");
@@ -101,8 +105,9 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerItem) {
+            exit = false;
             this.dispose();
-            new RegisterItemView();
+            new RegisterItemView(connection);
         }
 
         if (e.getSource() == listItem) {
@@ -143,25 +148,27 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
 
     @Override
     public void windowOpened(WindowEvent e) {
-        DBConnection DBconnection = new DBConnection();
-        Connection connection = DBconnection.connect();
         DBCreateTables.createTables(connection);
-        try {
-            connection.close();
-        } catch (SQLException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        
+        exit = true;
     }
     @Override
     public void windowActivated(WindowEvent e) {
     }
     @Override
-    public void windowClosed(WindowEvent e) { 
+    public void windowClosed(WindowEvent e) {
+        if(exit == true){
+            System.out.println("Teste");
+            try {
+                connection.close();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } 
+        }
     }
     @Override
-    public void windowClosing(WindowEvent e) {  
+    public void windowClosing(WindowEvent e) {
+         
     }
     @Override
     public void windowDeactivated(WindowEvent e) { 
