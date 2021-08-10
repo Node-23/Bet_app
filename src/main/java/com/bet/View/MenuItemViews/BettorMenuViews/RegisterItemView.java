@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
 import com.bet.Service.CPFValidation;
+
 import com.bet.View.MainView;
 
 public class RegisterItemView extends JFrame implements WindowListener, ActionListener, FocusListener {
