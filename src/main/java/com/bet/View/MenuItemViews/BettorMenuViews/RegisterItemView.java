@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
+import com.bet.Service.CPFValidation;
 import com.bet.View.MainView;
 
 public class RegisterItemView extends JFrame implements WindowListener, ActionListener, FocusListener {
@@ -170,6 +171,12 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
                     || mainphonenumber.replaceAll("\\D+", "").length() != 11
                     || secondaryphonenumber.replaceAll("\\D+", "").length() != 11) {
                 JOptionPane.showMessageDialog(null, "All fields must be filled", "Bettor Register",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if(CPFValidation.isValid(cpf) == false){
+                JOptionPane.showMessageDialog(null, "This CPF is not valid!", "Bettor Register",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if(CPFValidation.isRegistered(connection, cpf) == true){
+                JOptionPane.showMessageDialog(null, "This cpf is already registered!", "Bettor Register",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
