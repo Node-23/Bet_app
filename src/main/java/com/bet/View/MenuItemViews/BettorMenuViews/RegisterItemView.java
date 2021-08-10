@@ -168,15 +168,21 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             String cpf = "'" + textCPFField.getText() + "'";
             String mainphonenumber = "'" + textFirstNumberField.getText() + "'";
             String secondaryphonenumber = "'" + textSecondNumberField.getText() + "'";
-            if (textNameField.getText().isBlank() || cpf.replaceAll("\\D+", "").length() != 11
-                    || mainphonenumber.replaceAll("\\D+", "").length() != 11
-                    || secondaryphonenumber.replaceAll("\\D+", "").length() != 11) {
+            if (textNameField.getText().isBlank() || cpf.replaceAll("\\D+", "").length() != 11) {
                 JOptionPane.showMessageDialog(null, "All fields must be filled", "Bettor Register",
                         JOptionPane.ERROR_MESSAGE);
-            } else if(CPFValidation.isValid(cpf) == false){
+            } else if (mainphonenumber.replaceAll("\\D+", "").length() < 11
+                    && mainphonenumber.replaceAll("\\D+", "").length() > 1) {
+                JOptionPane.showMessageDialog(null, "The main phone field must be completed or blank",
+                        "Bettor Register", JOptionPane.ERROR_MESSAGE);
+            } else if (secondaryphonenumber.replaceAll("\\D+", "").length() < 11
+                    && secondaryphonenumber.replaceAll("\\D+", "").length() > 1) {
+                JOptionPane.showMessageDialog(null, "The secondary phone field must be completed or blank",
+                        "Bettor Register", JOptionPane.ERROR_MESSAGE);
+            } else if (CPFValidation.isValid(cpf) == false) {
                 JOptionPane.showMessageDialog(null, "This CPF is not valid!", "Bettor Register",
                         JOptionPane.ERROR_MESSAGE);
-            } else if(CPFValidation.isRegistered(connection, cpf) == true){
+            } else if (CPFValidation.isRegistered(connection, cpf) == true) {
                 JOptionPane.showMessageDialog(null, "This cpf is already registered!", "Bettor Register",
                         JOptionPane.ERROR_MESSAGE);
             } else {
@@ -201,6 +207,12 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
     private void bdRegistration(String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
         Statement statement;
+        if(mainphonenumber.replaceAll("\\D+", "").length() <=1){
+            mainphonenumber = null;
+        }
+        if(secondaryphonenumber.replaceAll("\\D+", "").length() <=1){
+            secondaryphonenumber = null;
+        }
         try {
             statement = connection.createStatement();
             String insertNewBettor = "INSERT INTO bettors(cpf,name,mainphonenumber,secondaryphonenumber) " + "VALUES ("
@@ -257,13 +269,15 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         }
 
         if (f.getSource() == textFirstNumberField) {
-            if (textFirstNumberField.getText().replaceAll("\\D+", "").length() != 11) {
+            if (textFirstNumberField.getText().replaceAll("\\D+", "").length() < 11
+            && textFirstNumberField.getText().replaceAll("\\D+", "").length() > 1) {
                 textFirstNumberField.setBorder(new LineBorder(Color.red, 2));
             }
         }
 
         if (f.getSource() == textSecondNumberField) {
-            if (textSecondNumberField.getText().replaceAll("\\D+", "").length() != 11) {
+            if (textSecondNumberField.getText().replaceAll("\\D+", "").length() < 11
+            && textSecondNumberField.getText().replaceAll("\\D+", "").length() > 1) {
                 textSecondNumberField.setBorder(new LineBorder(Color.red, 2));
             }
         }
