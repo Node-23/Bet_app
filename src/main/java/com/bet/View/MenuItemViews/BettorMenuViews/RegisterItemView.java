@@ -186,17 +186,34 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
                 JOptionPane.showMessageDialog(null, "This cpf is already registered!", "Bettor Register",
                         JOptionPane.ERROR_MESSAGE);
             } else {
-                bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
-                JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
-                        JOptionPane.PLAIN_MESSAGE);
-                name = "";
-                cpf = "";
-                mainphonenumber = "";
-                secondaryphonenumber = "";
-                textNameField.setText("");
-                textCPFField.setText("");
-                textFirstNumberField.setText("");
-                textSecondNumberField.setText("");
+                String confirmMainPhoneNumber = mainphonenumber;
+                String confirmSecondaryPhoneNumber = secondaryphonenumber;
+                if (mainphonenumber.replaceAll("\\D+", "").length() <= 1) {
+                    confirmMainPhoneNumber = "X";
+                }
+                if (secondaryphonenumber.replaceAll("\\D+", "").length() <= 1) {
+                    confirmSecondaryPhoneNumber = "X";
+                }
+                String confirmMessage = "Name: " + textNameField.getText() + "\n" + "CPF: " + textCPFField.getText()
+                        + "\n" + "Main phone number: " + confirmMainPhoneNumber + "\n"
+                        + "Secondary phone number: " + confirmSecondaryPhoneNumber + "\n"
+                        + "Are you sure about the bettor's info?";
+
+                int confirmInput = JOptionPane.showConfirmDialog(null, confirmMessage, "Bettor Register",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirmInput == 0) {
+                    bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
+                    JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
+                            JOptionPane.PLAIN_MESSAGE);
+                    name = "";
+                    cpf = "";
+                    mainphonenumber = "";
+                    secondaryphonenumber = "";
+                    textNameField.setText("");
+                    textCPFField.setText("");
+                    textFirstNumberField.setText("");
+                    textSecondNumberField.setText("");
+                }
             }
         }
         if (e.getSource() == cancelButton) {
@@ -207,10 +224,10 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
     private void bdRegistration(String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
         Statement statement;
-        if(mainphonenumber.replaceAll("\\D+", "").length() <=1){
+        if (mainphonenumber.replaceAll("\\D+", "").length() <= 1) {
             mainphonenumber = null;
         }
-        if(secondaryphonenumber.replaceAll("\\D+", "").length() <=1){
+        if (secondaryphonenumber.replaceAll("\\D+", "").length() <= 1) {
             secondaryphonenumber = null;
         }
         try {
@@ -270,14 +287,14 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
         if (f.getSource() == textFirstNumberField) {
             if (textFirstNumberField.getText().replaceAll("\\D+", "").length() < 11
-            && textFirstNumberField.getText().replaceAll("\\D+", "").length() > 1) {
+                    && textFirstNumberField.getText().replaceAll("\\D+", "").length() > 1) {
                 textFirstNumberField.setBorder(new LineBorder(Color.red, 2));
             }
         }
 
         if (f.getSource() == textSecondNumberField) {
             if (textSecondNumberField.getText().replaceAll("\\D+", "").length() < 11
-            && textSecondNumberField.getText().replaceAll("\\D+", "").length() > 1) {
+                    && textSecondNumberField.getText().replaceAll("\\D+", "").length() > 1) {
                 textSecondNumberField.setBorder(new LineBorder(Color.red, 2));
             }
         }
