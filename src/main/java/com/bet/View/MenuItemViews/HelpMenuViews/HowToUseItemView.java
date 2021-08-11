@@ -3,6 +3,7 @@ package com.bet.View.MenuItemViews.HelpMenuViews;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,9 @@ import com.bet.View.MainView;
 
 public class HowToUseItemView extends JFrame implements WindowListener{
     
-    public HowToUseItemView(){
+    Connection connection;
+    public HowToUseItemView(Connection connection){
+        this.connection = connection;
         this.setSize(420, 420);
         this.setTitle("How to use");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -23,7 +26,7 @@ public class HowToUseItemView extends JFrame implements WindowListener{
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView(); 
+        new MainView(connection); 
     }
     
     @Override
