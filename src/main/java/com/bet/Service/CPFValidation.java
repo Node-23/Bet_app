@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class CPFValidation {
     public static boolean isValid(String cpf) {
         int sum = 0;
@@ -61,8 +63,9 @@ public class CPFValidation {
                     return true;
                 }
              }
+            stmt.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "CPF Validation got wrong!", "CPF registration", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
         return false;

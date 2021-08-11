@@ -56,6 +56,7 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
         this.getContentPane().setBackground(new Color(0x334756));
         setLocationRelativeTo(null); //This method make the window shows in the center of the screen
         this.addWindowListener(this);
+        
         //Menubars settings----------------------------------    
         JMenuBar menuBar = new JMenuBar();
         JMenu bettorMenu = new JMenu("Bettors");

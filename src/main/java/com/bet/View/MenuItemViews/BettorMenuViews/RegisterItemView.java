@@ -124,7 +124,8 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             firstPhoneMask.install(textFirstNumberField);
             secondPhoneMask.install(textSecondNumberField);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "The mask got wrong!", "Mask on the text field",
+                        JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
 
@@ -237,7 +238,8 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             statement.executeUpdate(insertNewBettor);
             statement.close();
         } catch (SQLException e1) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "The insertion into DB got wrong!", "Mask on the text field",
+                        JOptionPane.ERROR_MESSAGE);
             e1.printStackTrace();
         }
     }
