@@ -3,6 +3,7 @@ package com.bet.View.MenuItemViews.BetMenuViews;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,9 @@ import com.bet.View.MainView;
 
 public class EndBetItemView extends JFrame implements WindowListener{
     
-    public EndBetItemView(){
+    Connection connection;
+    public EndBetItemView(Connection connection){
+        this.connection = connection;
         this.setSize(420, 420);
         this.setTitle("End Bet");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -23,7 +26,7 @@ public class EndBetItemView extends JFrame implements WindowListener{
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView(); 
+        new MainView(connection); 
     }
     
     @Override

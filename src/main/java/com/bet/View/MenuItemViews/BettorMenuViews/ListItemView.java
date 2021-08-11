@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -24,8 +25,9 @@ import com.bet.View.MainView;
 
 public class ListItemView extends JFrame implements WindowListener {
 
-    public ListItemView() {
-
+    Connection connection;
+    public ListItemView(Connection connection) {
+        this.connection = connection;
         this.setSize(840, 780);
         this.setTitle("Bettor List");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,7 +92,7 @@ public class ListItemView extends JFrame implements WindowListener {
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView();
+        new MainView(connection);
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.bet.Service.CPFValidation;
 import com.bet.View.MainView;
 
 public class RegisterItemView extends JFrame implements WindowListener, ActionListener, FocusListener {
+    
     Connection connection;
     private String nameMaskQuantity = "************************************************************";
     private JFormattedTextField textNameField = new JFormattedTextField();
@@ -133,7 +134,7 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView();
+        new MainView(connection);
     }
 
     @Override
