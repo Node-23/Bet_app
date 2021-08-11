@@ -8,11 +8,11 @@ public class DBCreateTables {
     public static void createTables(Connection connection){
         try {
             Statement statement = connection.createStatement();
-            String createBettorTable = "CREATE TABLE IF NOT EXISTS Bettor " +
+            String createBettorTable = "CREATE TABLE IF NOT EXISTS Bettors " +
             "(CPF varchar(14) PRIMARY KEY     NOT NULL," +
             " NAME           varchar(60)    NOT NULL, " +
             " mainPhoneNumber            varchar(15), " +
-            " secondPhoneNumber        CHAR(50))";
+            " secondaryPhoneNumber        varchar(15))";
             statement.executeUpdate(createBettorTable);
             statement.close();
         } catch (SQLException e) {
