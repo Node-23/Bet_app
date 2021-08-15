@@ -16,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import com.bet.Service.Database.DBConnection;
 import com.bet.Service.Database.DBCreateTables;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
 import com.bet.View.MenuItemViews.BetMenuViews.ListBetItemView;
@@ -30,9 +29,6 @@ import com.bet.View.MenuItemViews.HelpMenuViews.HowToUseItemView;
 
 public class MainView extends JFrame implements ActionListener, WindowListener{
     private boolean exit = false;
-    //DB settings-------------------------------------
-    DBConnection DBconnection = new DBConnection();
-    Connection connection = DBconnection.connect();
 
     private JMenuItem registerItem = new JMenuItem("Register");
     private JMenuItem listItem = new JMenuItem("List Bettors");
@@ -46,9 +42,10 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
 
     private JMenuItem howToUseItem = new JMenuItem("How can i use it?");
     private JMenuItem aboutItem = new JMenuItem("About");
-
+    Connection connection;
     
-    public MainView(){
+    public MainView(Connection connection){
+        this.connection = connection;
         //Frame settings----------------------------------
         this.setSize(420, 420);
         this.setTitle("Bet App");
@@ -113,8 +110,9 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
         }
 
         if (e.getSource() == listItem) {
+            exit = false;
             this.dispose();
-            new ListItemView();
+            new ListItemView(connection);
         }
        
         if (e.getSource() == newBetItem) {
@@ -124,28 +122,34 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
         }
         
         if (e.getSource() == listBetItem) {
+            exit = false;
             this.dispose();
-            new ListBetItemView();
+            new ListBetItemView(connection);
         }
         if (e.getSource() == endBetItem) {
+            exit = false;
             this.dispose();
-            new EndBetItemView();
+            new EndBetItemView(connection);
         }
         if (e.getSource() == drawItem) {
+            exit = false;
             this.dispose();
-            new DrawItemView();
+            new DrawItemView(connection);
         }
         if (e.getSource() == listDrawItem) {
+            exit = false;
             this.dispose();
-            new ListDrawItemView();
+            new ListDrawItemView(connection);
         }
         if (e.getSource() == howToUseItem) {
+            exit = false;
             this.dispose();
-            new HowToUseItemView();
+            new HowToUseItemView(connection);
         }
         if (e.getSource() == aboutItem) {
+            exit = false;
             this.dispose();
-            new AboutItemView();
+            new AboutItemView(connection);
         }
     }
 
@@ -160,7 +164,6 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
     @Override
     public void windowClosed(WindowEvent e) {
         if(exit == true){
-            System.out.println("Teste");
             try {
                 connection.close();
             } catch (SQLException e1) {

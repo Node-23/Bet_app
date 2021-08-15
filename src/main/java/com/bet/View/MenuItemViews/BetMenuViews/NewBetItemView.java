@@ -59,7 +59,7 @@ public class NewBetItemView extends JFrame implements WindowListener{
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView(); 
+        new MainView(connection); 
     }
     
     @Override
