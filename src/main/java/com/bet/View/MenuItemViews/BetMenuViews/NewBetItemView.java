@@ -16,9 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import com.bet.View.MainView;
 
-public class NewBetItemView extends JFrame implements WindowListener, FocusListener, ActionListener{
+public class NewBetItemView extends JFrame implements WindowListener, FocusListener, ActionListener, ChangeListener{
     Connection connection;
     private JButton confirmButton = new JButton("Confirm");
     private JButton cancelButton = new JButton("Cancel");
@@ -100,6 +103,17 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
 //------------------------------------------------------------//
 
 
+//-------------------------Labels-----------------------------//
+
+        typeBetsLabel = new JLabel("Choose the bet type: ");
+        typeBetsLabel.setBounds(37, 5, 232, 43);
+        typeBetsLabel.setForeground(Color.black);
+        this.add(typeBetsLabel);
+        quantNumbersLabel.setBounds(37, 200, 300, 39);
+        quantNumbersLabel.setForeground(Color.GREEN);
+        this.add(quantNumbersLabel);
+//-----------------------------------------------------------//
+
     }
 
     @Override
@@ -160,5 +174,8 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
         
     }
 
-
+    @Override
+    public void stateChanged(ChangeEvent e){
+        quantNumbersLabel.setText("Quatity of numbers: ");
+    }
 }
