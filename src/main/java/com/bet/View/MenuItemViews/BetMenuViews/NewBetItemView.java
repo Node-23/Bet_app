@@ -14,8 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.UIManager;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import com.bet.View.MainView;
