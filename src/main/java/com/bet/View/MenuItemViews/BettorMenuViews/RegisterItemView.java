@@ -51,7 +51,7 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         setLocationRelativeTo(null);
         this.setLayout(null);
 
-        // -------------------------text fields--------------------------------------------//
+// -------------------------text fields--------------------------------------------//
         textNameField.setBounds(94, 34, 232, 39);
         textNameField.setToolTipText("Insert your name");
         this.add(textNameField);

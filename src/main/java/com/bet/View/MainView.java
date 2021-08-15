@@ -118,8 +118,9 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
         }
        
         if (e.getSource() == newBetItem) {
+            exit = false;
             this.dispose();
-            new NewBetItemView();
+            new NewBetItemView(connection);
         }
         
         if (e.getSource() == listBetItem) {
