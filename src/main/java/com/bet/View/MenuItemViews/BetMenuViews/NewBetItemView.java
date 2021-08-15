@@ -31,14 +31,15 @@ public class NewBetItemView extends JFrame implements WindowListener{
         this.addWindowListener(this);
         setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setLayout(null);
 
 //-------------------Radio Button------------------------------//
         //manyCardsButton.setBounds(x, y, width, height);
         //uniqueCardButton.setBounds(x, y, width, height);
-        group.add(manyCardsButton);
-        group.add(uniqueCardButton);
-        this.add(manyCardsButton);
-        this.add(uniqueCardButton);
+        //group.add(manyCardsButton);
+        //group.add(uniqueCardButton);
+        //this.add(manyCardsButton);
+        //this.add(uniqueCardButton);
 //------------------------------------------------------------//
 
 //-------------------Button-----------------------------------//
