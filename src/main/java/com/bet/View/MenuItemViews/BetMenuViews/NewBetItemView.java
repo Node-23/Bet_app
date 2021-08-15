@@ -1,6 +1,10 @@
 package com.bet.View.MenuItemViews.BetMenuViews;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -9,11 +13,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.UIManager;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import com.bet.View.MainView;
 
-public class NewBetItemView extends JFrame implements WindowListener{
+public class NewBetItemView extends JFrame implements WindowListener, FocusListener, ActionListener{
     Connection connection;
     private JButton confirmButton = new JButton("Confirm");
     private JButton cancelButton = new JButton("Cancel");
@@ -34,23 +41,31 @@ public class NewBetItemView extends JFrame implements WindowListener{
         this.setLayout(null);
 
 //-------------------Radio Button------------------------------//
-        //manyCardsButton.setBounds(x, y, width, height);
-        //uniqueCardButton.setBounds(x, y, width, height);
-        //group.add(manyCardsButton);
-        //group.add(uniqueCardButton);
-        //this.add(manyCardsButton);
-        //this.add(uniqueCardButton);
+        manyCardsButton.setBounds(37, 34, 100, 39);
+        manyCardsButton.setBackground(new Color(0x334756));
+        manyCardsButton.setForeground(Color.white);
+        uniqueCardButton.setBounds(227, 34, 100, 39);
+        uniqueCardButton.setBackground(new Color(0x334756));
+        uniqueCardButton.setForeground(Color.white);
+        group.add(manyCardsButton);
+        group.add(uniqueCardButton);
+        this.add(manyCardsButton);
+        this.add(uniqueCardButton);
 //------------------------------------------------------------//
 
 //-------------------Button-----------------------------------//
         confirmButton.setBounds(37, 300, 115, 43);
         confirmButton.setForeground(Color.white);
         confirmButton.setBackground(Color.green);
+        confirmButton.addFocusListener(this);
+        confirmButton.addActionListener(this);
         this.add(confirmButton);
 
         cancelButton.setBounds(227, 300, 115, 43);
         cancelButton.setForeground(Color.white);
         cancelButton.setBackground(Color.red);
+        cancelButton.addFocusListener(this);
+        cancelButton.addActionListener(this);
         this.add(cancelButton);
 //------------------------------------------------------------//
 
@@ -59,7 +74,7 @@ public class NewBetItemView extends JFrame implements WindowListener{
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView(); 
+        new MainView(connection); 
     }
     
     @Override
@@ -74,4 +89,33 @@ public class NewBetItemView extends JFrame implements WindowListener{
     public void windowIconified(WindowEvent arg0) {}
     @Override
     public void windowOpened(WindowEvent arg0) {}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+
+        if (e.getSource() == cancelButton) {
+            this.dispose();
+        }
+
+    }
+
+    @Override
+    public void focusGained(FocusEvent f) {
+        if (f.getSource() == confirmButton) {
+            UIManager.put("Button.select", new Color(0x2d572c));
+        }
+
+        if (f.getSource() == cancelButton) {
+            UIManager.put("Button.select", new Color(0xcc0000));
+        }
+        
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        
+    }
+
+
 }
