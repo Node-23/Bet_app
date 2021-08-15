@@ -8,8 +8,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -22,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
+import com.bet.Controller.Bettor.BDRegistration;
 import com.bet.Service.CPFValidation;
 
 import com.bet.View.MainView;
@@ -203,7 +202,7 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
                 int confirmInput = JOptionPane.showConfirmDialog(null, confirmMessage, "Bettor Register",
                         JOptionPane.YES_NO_OPTION);
                 if (confirmInput == 0) {
-                    bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
+                    BDRegistration.registration(connection ,name, cpf, mainphonenumber, secondaryphonenumber);
                     JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
                             JOptionPane.PLAIN_MESSAGE);
                     name = "";
@@ -221,26 +220,6 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             this.dispose();
         }
 
-    }
-
-    private void bdRegistration(String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
-        Statement statement;
-        if (mainphonenumber.replaceAll("\\D+", "").length() <= 1) {
-            mainphonenumber = null;
-        }
-        if (secondaryphonenumber.replaceAll("\\D+", "").length() <= 1) {
-            secondaryphonenumber = null;
-        }
-        try {
-            statement = connection.createStatement();
-            String insertNewBettor = "INSERT INTO bettors(cpf,name,mainphonenumber,secondaryphonenumber) " + "VALUES ("
-                    + cpf + "," + name + ", " + mainphonenumber + "," + secondaryphonenumber + ");";
-            statement.executeUpdate(insertNewBettor);
-            statement.close();
-        } catch (SQLException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
     }
 
     @Override
