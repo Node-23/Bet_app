@@ -58,6 +58,8 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
 
         quantNumbersSlider = new JSlider(0,15,0);
         quantNumbersSlider.setBounds(37, 99, 300, 39);
+        quantNumbersSlider.setBackground(new Color(0x334756));
+        quantNumbersSlider.setForeground(Color.white);
         quantNumbersSlider.setPaintTicks(true);
         quantNumbersSlider.setPaintLabels(true);
         quantNumbersSlider.setMajorTickSpacing(1);
@@ -66,6 +68,8 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
 
         quantCardsSlider = new JSlider(2,30,2);
         quantCardsSlider.setBounds(37, 99, 300, 39);
+        quantCardsSlider.setBackground(new Color(0x334756));
+        quantCardsSlider.setForeground(Color.white);
         quantCardsSlider.setPaintTicks(true);
         quantCardsSlider.setPaintLabels(true);
         quantCardsSlider.setMinorTickSpacing(1);
