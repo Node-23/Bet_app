@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import com.bet.Service.Database.DBConnection;
 import com.bet.Service.Database.DBCreateTables;
@@ -162,7 +163,8 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
             try {
                 connection.close();
             } catch (SQLException e1) {
-                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "The view creation got wrong!", "Create view",
+                        JOptionPane.ERROR_MESSAGE);
                 e1.printStackTrace();
             } 
         }
