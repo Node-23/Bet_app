@@ -12,6 +12,7 @@ import java.sql.Connection;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.UIManager;
@@ -26,6 +27,10 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
     private ButtonGroup group = new ButtonGroup();
     private JSlider quantNumbersSlider;
     private JSlider quantCardsSlider;
+    private JLabel typeBetsLabel;
+    private JLabel quantNumbersLabel;
+    private JLabel quantCardsLabel;
+    
 
     public NewBetItemView(Connection connection){
         this.connection=connection;
