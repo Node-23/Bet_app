@@ -1,6 +1,7 @@
 package com.bet.View.MenuItemViews.BetMenuViews;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -8,14 +9,12 @@ import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
 import javax.swing.UIManager;
-
-
 import com.bet.View.MainView;
 
 public class NewBetItemView extends JFrame implements WindowListener, FocusListener, ActionListener{
@@ -25,6 +24,8 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
     private JRadioButton manyCardsButton = new JRadioButton("Many Cards");
     private JRadioButton uniqueCardButton = new JRadioButton("Unique Card");
     private ButtonGroup group = new ButtonGroup();
+    private JSlider quantNumbersSlider;
+    private JSlider quantCardsSlider;
 
     public NewBetItemView(Connection connection){
         this.connection=connection;
@@ -42,14 +43,36 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
         manyCardsButton.setBounds(37, 34, 100, 39);
         manyCardsButton.setBackground(new Color(0x334756));
         manyCardsButton.setForeground(Color.white);
+        manyCardsButton.addActionListener(this);
         uniqueCardButton.setBounds(227, 34, 100, 39);
         uniqueCardButton.setBackground(new Color(0x334756));
         uniqueCardButton.setForeground(Color.white);
+        uniqueCardButton.addActionListener(this);
         group.add(manyCardsButton);
         group.add(uniqueCardButton);
         this.add(manyCardsButton);
         this.add(uniqueCardButton);
 //------------------------------------------------------------//
+
+//--------------------------Sliders----------------------------//
+
+        quantNumbersSlider = new JSlider(0,15,0);
+        quantNumbersSlider.setBounds(37, 99, 300, 39);
+        quantNumbersSlider.setPaintTicks(true);
+        quantNumbersSlider.setPaintLabels(true);
+        quantNumbersSlider.setMajorTickSpacing(1);
+        quantNumbersSlider.setVisible(false);
+        this.add(quantNumbersSlider);
+
+        quantCardsSlider = new JSlider(2,30,2);
+        quantCardsSlider.setBounds(37, 99, 300, 39);
+        quantCardsSlider.setPaintTicks(true);
+        quantCardsSlider.setPaintLabels(true);
+        quantCardsSlider.setMinorTickSpacing(1);
+        quantCardsSlider.setMajorTickSpacing(2);
+        quantCardsSlider.setVisible(false);
+        this.add(quantCardsSlider);
+//-------------------------------------------------------------//
 
 //-------------------Button-----------------------------------//
         confirmButton.setBounds(37, 300, 115, 43);
@@ -90,7 +113,20 @@ public class NewBetItemView extends JFrame implements WindowListener, FocusListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == uniqueCardButton) {
+            quantNumbersSlider.setVisible(true);
+            quantCardsSlider.setVisible(false);
+        }
         
+        if (e.getSource() == manyCardsButton) {
+            quantCardsSlider.setVisible(true);
+            quantNumbersSlider.setVisible(false);
+        }
+
+        if (e.getSource() == confirmButton) {
+            this.dispose();
+        }
 
         if (e.getSource() == cancelButton) {
             this.dispose();
