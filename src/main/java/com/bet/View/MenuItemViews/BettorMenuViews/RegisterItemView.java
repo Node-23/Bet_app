@@ -9,7 +9,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.text.ParseException;
-
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -19,10 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
-
 import com.bet.Controller.Bettor.BDRegistration;
 import com.bet.Service.CPFValidation;
-
 import com.bet.View.MainView;
 
 public class RegisterItemView extends JFrame implements WindowListener, ActionListener, FocusListener {
