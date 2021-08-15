@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import com.bet.Service.Database.DBCreateTables;
 import com.bet.View.MenuItemViews.BetMenuViews.EndBetItemView;
@@ -53,6 +54,7 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
         this.getContentPane().setBackground(new Color(0x334756));
         setLocationRelativeTo(null); //This method make the window shows in the center of the screen
         this.addWindowListener(this);
+        
         //Menubars settings----------------------------------    
         JMenuBar menuBar = new JMenuBar();
         JMenu bettorMenu = new JMenu("Bettors");
@@ -165,7 +167,8 @@ public class MainView extends JFrame implements ActionListener, WindowListener{
             try {
                 connection.close();
             } catch (SQLException e1) {
-                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "The view creation got wrong!", "Create view",
+                        JOptionPane.ERROR_MESSAGE);
                 e1.printStackTrace();
             } 
         }

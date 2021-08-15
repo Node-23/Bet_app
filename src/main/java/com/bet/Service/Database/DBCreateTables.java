@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class DBCreateTables {
     public static void createTables(Connection connection){
         try {
@@ -16,7 +18,8 @@ public class DBCreateTables {
             statement.executeUpdate(createBettorTable);
             statement.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "The creation of tables got wrong!", "Create tables on DB",
+                        JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
