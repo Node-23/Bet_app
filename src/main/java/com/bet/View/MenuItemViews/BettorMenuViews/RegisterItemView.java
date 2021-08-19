@@ -8,10 +8,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
-
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -21,9 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
-
+import com.bet.Controller.Bettor.BDRegistration;
 import com.bet.Service.CPFValidation;
-
 import com.bet.View.MainView;
 
 public class RegisterItemView extends JFrame implements WindowListener, ActionListener, FocusListener {
@@ -52,7 +48,7 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         setLocationRelativeTo(null);
         this.setLayout(null);
 
-        // bottons and text fields
+// -------------------------text fields--------------------------------------------//
         textNameField.setBounds(94, 34, 232, 39);
         textNameField.setToolTipText("Insert your name");
         this.add(textNameField);
@@ -72,7 +68,9 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         textSecondNumberField.setHorizontalAlignment(JTextField.CENTER);
         textSecondNumberField.setToolTipText("Insert only the numbers");
         this.add(textSecondNumberField);
+//---------------------------------------------------------------------------------------//
 
+//-------------------------buttons-------------------------------------------------------//
         confirmButton.setBounds(37, 300, 115, 43);
         confirmButton.setForeground(Color.white);
         confirmButton.setBackground(Color.green);
@@ -82,7 +80,9 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         cancelButton.setForeground(Color.white);
         cancelButton.setBackground(Color.red);
         this.add(cancelButton);
+//----------------------------------------------------------------------------------------//
 
+//--------------------------------labels-------------------------------------------------//
         nameLabel = new JLabel("Name: ");
         idLabel = new JLabel("CPF: ");
         firstPhoneLabel = new JLabel("First phone number (optional): ");
@@ -96,11 +96,14 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
         firstPhoneLabel.setForeground(Color.yellow);
         secondPhoneLabel.setBounds(47, 200, 232, 31);
         secondPhoneLabel.setForeground(Color.yellow);
+//---------------------------------------------------------------------------------------//
 
+//---------------------------adding into the view----------------------------------------//
         this.add(nameLabel);
         this.add(idLabel);
         this.add(firstPhoneLabel);
         this.add(secondPhoneLabel);
+//---------------------------------------------------------------------------------------//
 
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
@@ -125,7 +128,8 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             firstPhoneMask.install(textFirstNumberField);
             secondPhoneMask.install(textSecondNumberField);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "The mask got wrong!", "Mask on the text field",
+                        JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
 
@@ -203,7 +207,7 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
                 int confirmInput = JOptionPane.showConfirmDialog(null, confirmMessage, "Bettor Register",
                         JOptionPane.YES_NO_OPTION);
                 if (confirmInput == 0) {
-                    bdRegistration(name, cpf, mainphonenumber, secondaryphonenumber);
+                    BDRegistration.registration(connection ,name, cpf, mainphonenumber, secondaryphonenumber);
                     JOptionPane.showMessageDialog(null, "Bettor registered sucessfully", "Bettor Register",
                             JOptionPane.PLAIN_MESSAGE);
                     name = "";
@@ -221,26 +225,6 @@ public class RegisterItemView extends JFrame implements WindowListener, ActionLi
             this.dispose();
         }
 
-    }
-
-    private void bdRegistration(String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
-        Statement statement;
-        if (mainphonenumber.replaceAll("\\D+", "").length() <= 1) {
-            mainphonenumber = null;
-        }
-        if (secondaryphonenumber.replaceAll("\\D+", "").length() <= 1) {
-            secondaryphonenumber = null;
-        }
-        try {
-            statement = connection.createStatement();
-            String insertNewBettor = "INSERT INTO bettors(cpf,name,mainphonenumber,secondaryphonenumber) " + "VALUES ("
-                    + cpf + "," + name + ", " + mainphonenumber + "," + secondaryphonenumber + ");";
-            statement.executeUpdate(insertNewBettor);
-            statement.close();
-        } catch (SQLException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
     }
 
     @Override

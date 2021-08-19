@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.bet.Controller.Bettor.BettorList;
 import com.bet.Service.JTableButtonServices.DeleteButtonEditor;
 import com.bet.Service.JTableButtonServices.DeleteButtonRenderer;
 import com.bet.Service.JTableButtonServices.EditButtonEditor;
@@ -36,12 +37,13 @@ public class ListItemView extends JFrame implements WindowListener {
         this.addWindowListener(this);
         setLocationRelativeTo(null);
 
+        //BettorList.getBettors(connection);
+        // Object[][] data = new Object[][] {{"Matheus Vinicius L.", "07217858321", "(86) 9 9487-0130", "-", "Edit", "Delete"},
+        //                 {"Ana Beatriz Costa", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"},
+        //                 {"Matheus Vinicius Linhares Lemos de Oliveira", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"}};
+        Object[][] data = BettorList.getBettors(connection);
         DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(
-                new Object[][] {{"Matheus Vinicius L.", "07217858321", "(86) 9 9487-0130", "-", "Edit", "Delete"},
-                        {"Ana Beatriz Costa", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"},
-                        {"Matheus Vinicius Linhares Lemos de Oliveira", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"}},
-                new Object[] { "Full Name", "CPF", "Main Phone", "Secondary Phone", "Edit Bettor", "Delete Bettor"});
+        dm.setDataVector(data, new Object[] { "Full Name", "CPF", "Main Phone", "Secondary Phone", "Edit Bettor", "Delete Bettor"});
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 1));
