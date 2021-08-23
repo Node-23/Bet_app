@@ -6,18 +6,25 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class DBConnection {
-    private final String url = "jdbc:postgresql://localhost/Bet_App";
-    private final String user = "postgres";
-    private final String password = "88239474";
+import org.postgresql.util.PSQLException;
 
-    public Connection connect() {
+public class DBConnection {
+    private static final String url = "jdbc:postgresql://localhost/bet_app";
+    private static final String user = "postgres";
+    private static final String password = "88239474";
+
+    public static Connection connect() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
+        } catch (PSQLException e) {
+            if (e.getSQLState().equals("3D000")) {
+                DBCreation.createDB();
+                return connect();
+            }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "The connection with the database got wrong!", "Connection with DB",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The connection with the database got wrong!", "Connection with DB",JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
         return connection;
     }

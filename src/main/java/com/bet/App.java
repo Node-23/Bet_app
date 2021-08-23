@@ -11,8 +11,7 @@ public class App {
         Locale locale = new Locale("en_US");
         Locale.setDefault(locale);
     
-        DBConnection DBconnection = new DBConnection();
-        Connection connection = DBconnection.connect();
+        Connection connection = DBConnection.connect();   
         
         new MainView(connection);
     }

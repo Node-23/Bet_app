@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class BDRegistration {
     
     public static void registration(Connection connection, String name, String cpf, String mainphonenumber, String secondaryphonenumber) {
@@ -21,7 +23,7 @@ public class BDRegistration {
             statement.executeUpdate(insertNewBettor);
             statement.close();
         } catch (SQLException e1) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "Bettor data base registration got wrong!", "Bettor Registration",JOptionPane.ERROR_MESSAGE);
             e1.printStackTrace();
         }
     }

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class BettorList {
     final static int tableColumnQuantity = 6;
 
@@ -28,11 +30,10 @@ public class BettorList {
                 bettorsList[rowCounter][4] = "Edit";
                 bettorsList[rowCounter][5] = "Delete";
                 rowCounter++;
-                System.out.println(rowCounter);
             }
             statement.close();
         } catch (SQLException e1) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "Data base error while listing bettors!", "Bettors list",JOptionPane.ERROR_MESSAGE);
             e1.printStackTrace();
         }
         return bettorsList;
