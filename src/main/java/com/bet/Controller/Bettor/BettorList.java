@@ -28,7 +28,6 @@ public class BettorList {
                 bettorsList[rowCounter][4] = "Edit";
                 bettorsList[rowCounter][5] = "Delete";
                 rowCounter++;
-                System.out.println(rowCounter);
             }
             statement.close();
         } catch (SQLException e1) {

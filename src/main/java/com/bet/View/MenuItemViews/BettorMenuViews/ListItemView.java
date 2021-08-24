@@ -27,7 +27,9 @@ import com.bet.View.MainView;
 public class ListItemView extends JFrame implements WindowListener {
 
     Connection connection;
+    private boolean exit;
     public ListItemView(Connection connection) {
+        this.exit = true;
         this.connection = connection;
         this.setSize(840, 780);
         this.setTitle("Bettor List");
@@ -37,10 +39,6 @@ public class ListItemView extends JFrame implements WindowListener {
         this.addWindowListener(this);
         setLocationRelativeTo(null);
 
-        //BettorList.getBettors(connection);
-        // Object[][] data = new Object[][] {{"Matheus Vinicius L.", "07217858321", "(86) 9 9487-0130", "-", "Edit", "Delete"},
-        //                 {"Ana Beatriz Costa", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"},
-        //                 {"Matheus Vinicius Linhares Lemos de Oliveira", "07275984214", "(86) 9 9465-8954", "(86) 9 9435-7456", "Edit", "Delete"}};
         Object[][] data = BettorList.getBettors(connection);
         DefaultTableModel dm = new DefaultTableModel();
         dm.setDataVector(data, new Object[] { "Full Name", "CPF", "Main Phone", "Secondary Phone", "Edit Bettor", "Delete Bettor"});
@@ -71,7 +69,8 @@ public class ListItemView extends JFrame implements WindowListener {
         table.getColumn("Edit Bettor").setCellEditor(new EditButtonEditor(new JCheckBox()));
         
         table.getColumn("Delete Bettor").setCellRenderer(new DeleteButtonRenderer());
-        table.getColumn("Delete Bettor").setCellEditor(new DeleteButtonEditor(new JCheckBox()));
+        table.getColumn("Delete Bettor").setCellEditor(new DeleteButtonEditor(new JCheckBox(), connection, this));
+        
 
         Border empty = new EmptyBorder(0, 0, 0, 0);
         JScrollPane scroll = new JScrollPane(table);
@@ -92,9 +91,15 @@ public class ListItemView extends JFrame implements WindowListener {
         this.setVisible(true);
     }
 
+    public void setExit(){
+        this.exit = false;
+    }
+
     @Override
     public void windowClosed(WindowEvent arg0) {
-        new MainView(connection);
+        if(exit == true){
+            new MainView(connection);
+        }
     }
 
     @Override
