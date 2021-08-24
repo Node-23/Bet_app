@@ -1,7 +1,6 @@
 package com.bet.View.MenuItemViews.BetMenuViews;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -9,12 +8,14 @@ import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.UIManager;
+
 import com.bet.View.MainView;
 
 public class NewBetItemView extends JFrame implements WindowListener, FocusListener, ActionListener{
